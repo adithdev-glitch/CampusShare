@@ -42,6 +42,57 @@ const DotLine = ({ x1, y1, x2, y2 }) => {
   );
 };
 
+/* ── Floating Photo Card with Entrance & Scroll Rotation ── */
+const PhotoCard = ({
+  left,
+  right,
+  top,
+  width,
+  height,
+  image,
+  bgPos,
+  rotate,
+  y,
+  delay = 0,
+}) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.45, y: 40 }}
+    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+    viewport={{ once: false, amount: 0.2 }}
+    transition={{
+      duration: 0.75,
+      delay,
+      ease: [0.16, 1, 0.3, 1],
+    }}
+    className="absolute z-10"
+    style={{ left, right, top }}
+  >
+    <motion.div
+      className="rounded-[22px] overflow-hidden border-2 border-white will-change-transform cursor-pointer"
+      style={{
+        width,
+        height,
+        rotate,
+        y,
+        boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
+      }}
+      whileHover={{ scale: 1.08 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+    >
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          backgroundImage: `url(${image})`,
+          backgroundSize: '400% 100%',
+          backgroundPosition: bgPos,
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+    </motion.div>
+  </motion.div>
+);
+
 /* ── Community Showcase Section with Framer Motion Scroll Animation ── */
 const CommunitySection = () => {
   const sectionRef = useRef(null);
@@ -51,16 +102,16 @@ const CommunitySection = () => {
   });
 
   // Rotation transforms on scroll for left cards (counter-clockwise emphasis)
-  const rotL1 = useTransform(scrollYProgress, [0, 1], [15, -28]);
-  const rotL2 = useTransform(scrollYProgress, [0, 1], [-10, 24]);
-  const rotL3 = useTransform(scrollYProgress, [0, 1], [22, -18]);
-  const rotL4 = useTransform(scrollYProgress, [0, 1], [-16, 26]);
+  const rotL1 = useTransform(scrollYProgress, [0, 1], [22, -32]);
+  const rotL2 = useTransform(scrollYProgress, [0, 1], [-12, 28]);
+  const rotL3 = useTransform(scrollYProgress, [0, 1], [26, -22]);
+  const rotL4 = useTransform(scrollYProgress, [0, 1], [-18, 30]);
 
   // Rotation transforms on scroll for right cards (clockwise emphasis)
-  const rotR1 = useTransform(scrollYProgress, [0, 1], [-22, 25]);
-  const rotR2 = useTransform(scrollYProgress, [0, 1], [18, -26]);
-  const rotR3 = useTransform(scrollYProgress, [0, 1], [-15, 28]);
-  const rotR4 = useTransform(scrollYProgress, [0, 1], [24, -20]);
+  const rotR1 = useTransform(scrollYProgress, [0, 1], [-25, 28]);
+  const rotR2 = useTransform(scrollYProgress, [0, 1], [22, -30]);
+  const rotR3 = useTransform(scrollYProgress, [0, 1], [-18, 32]);
+  const rotR4 = useTransform(scrollYProgress, [0, 1], [28, -24]);
 
   // Gentle vertical parallax for smooth floating sensation
   const yL1 = useTransform(scrollYProgress, [0, 1], [40, -40]);
@@ -89,217 +140,105 @@ const CommunitySection = () => {
       />
 
       {/* ─── LEFT: 4 photo cards ─── */}
-      {/* Card L1 — top far left, large */}
-      <motion.div
-        className="absolute rounded-[22px] overflow-hidden border-2 border-white will-change-transform"
-        style={{
-          left: '3.5%',
-          top: '9%',
-          width: 122,
-          height: 164,
-          rotate: rotL1,
-          y: yL1,
-          boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
-        }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundImage: 'url(/students_left.jpg)',
-            backgroundSize: '400% 100%',
-            backgroundPosition: '0% 50%',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      </motion.div>
-
-      {/* Card L2 — second row, offset right, medium */}
-      <motion.div
-        className="absolute rounded-[22px] overflow-hidden border-2 border-white will-change-transform"
-        style={{
-          left: '16%',
-          top: '16%',
-          width: 108,
-          height: 148,
-          rotate: rotL2,
-          y: yL2,
-          boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
-        }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundImage: 'url(/students_left.jpg)',
-            backgroundSize: '400% 100%',
-            backgroundPosition: '33.3% 50%',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      </motion.div>
-
-      {/* Card L3 — below L2, slightly right */}
-      <motion.div
-        className="absolute rounded-[22px] overflow-hidden border-2 border-white will-change-transform"
-        style={{
-          left: '18%',
-          top: '56%',
-          width: 98,
-          height: 136,
-          rotate: rotL3,
-          y: yL3,
-          boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
-        }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundImage: 'url(/students_left.jpg)',
-            backgroundSize: '400% 100%',
-            backgroundPosition: '66.6% 50%',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      </motion.div>
-
-      {/* Card L4 — bottom far left */}
-      <motion.div
-        className="absolute rounded-[22px] overflow-hidden border-2 border-white will-change-transform"
-        style={{
-          left: '4.5%',
-          top: '68%',
-          width: 110,
-          height: 148,
-          rotate: rotL4,
-          y: yL4,
-          boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
-        }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundImage: 'url(/students_left.jpg)',
-            backgroundSize: '400% 100%',
-            backgroundPosition: '100% 50%',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      </motion.div>
+      <PhotoCard
+        left="3.5%"
+        top="9%"
+        width={122}
+        height={164}
+        image="/students_left.jpg"
+        bgPos="0% 50%"
+        rotate={rotL1}
+        y={yL1}
+        delay={0.05}
+      />
+      <PhotoCard
+        left="16%"
+        top="16%"
+        width={108}
+        height={148}
+        image="/students_left.jpg"
+        bgPos="33.3% 50%"
+        rotate={rotL2}
+        y={yL2}
+        delay={0.12}
+      />
+      <PhotoCard
+        left="18%"
+        top="56%"
+        width={98}
+        height={136}
+        image="/students_left.jpg"
+        bgPos="66.6% 50%"
+        rotate={rotL3}
+        y={yL3}
+        delay={0.2}
+      />
+      <PhotoCard
+        left="4.5%"
+        top="68%"
+        width={110}
+        height={148}
+        image="/students_left.jpg"
+        bgPos="100% 50%"
+        rotate={rotL4}
+        y={yL4}
+        delay={0.28}
+      />
 
       {/* ─── RIGHT: 4 photo cards ─── */}
-      {/* Card R1 — top right area, medium */}
-      <motion.div
-        className="absolute rounded-[22px] overflow-hidden border-2 border-white will-change-transform"
-        style={{
-          right: '18%',
-          top: '11%',
-          width: 108,
-          height: 148,
-          rotate: rotR1,
-          y: yR1,
-          boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
-        }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundImage: 'url(/students_right.jpg)',
-            backgroundSize: '400% 100%',
-            backgroundPosition: '0% 50%',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      </motion.div>
-
-      {/* Card R2 — top far right, slightly lower */}
-      <motion.div
-        className="absolute rounded-[22px] overflow-hidden border-2 border-white will-change-transform"
-        style={{
-          right: '3.5%',
-          top: '8%',
-          width: 122,
-          height: 164,
-          rotate: rotR2,
-          y: yR2,
-          boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
-        }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundImage: 'url(/students_right.jpg)',
-            backgroundSize: '400% 100%',
-            backgroundPosition: '33.3% 50%',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      </motion.div>
-
-      {/* Card R3 — middle right, large */}
-      <motion.div
-        className="absolute rounded-[22px] overflow-hidden border-2 border-white will-change-transform"
-        style={{
-          right: '4.5%',
-          top: '47%',
-          width: 120,
-          height: 166,
-          rotate: rotR3,
-          y: yR3,
-          boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
-        }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundImage: 'url(/students_right.jpg)',
-            backgroundSize: '400% 100%',
-            backgroundPosition: '66.6% 50%',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      </motion.div>
-
-      {/* Card R4 — bottom far right */}
-      <motion.div
-        className="absolute rounded-[22px] overflow-hidden border-2 border-white will-change-transform"
-        style={{
-          right: '17%',
-          top: '68%',
-          width: 102,
-          height: 140,
-          rotate: rotR4,
-          y: yR4,
-          boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
-        }}
-        whileHover={{ scale: 1.05 }}
-      >
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundImage: 'url(/students_right.jpg)',
-            backgroundSize: '400% 100%',
-            backgroundPosition: '100% 50%',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
-      </motion.div>
+      <PhotoCard
+        right="18%"
+        top="11%"
+        width={108}
+        height={148}
+        image="/students_right.jpg"
+        bgPos="0% 50%"
+        rotate={rotR1}
+        y={yR1}
+        delay={0.08}
+      />
+      <PhotoCard
+        right="3.5%"
+        top="8%"
+        width={122}
+        height={164}
+        image="/students_right.jpg"
+        bgPos="33.3% 50%"
+        rotate={rotR2}
+        y={yR2}
+        delay={0.15}
+      />
+      <PhotoCard
+        right="4.5%"
+        top="47%"
+        width={120}
+        height={166}
+        image="/students_right.jpg"
+        bgPos="66.6% 50%"
+        rotate={rotR3}
+        y={yR3}
+        delay={0.22}
+      />
+      <PhotoCard
+        right="17%"
+        top="68%"
+        width={102}
+        height={140}
+        image="/students_right.jpg"
+        bgPos="100% 50%"
+        rotate={rotR4}
+        y={yR4}
+        delay={0.3}
+      />
 
       {/* ─── Center content ─── */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 max-w-md">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-10 flex flex-col items-center justify-center text-center px-6 max-w-md"
+      >
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight">
           Campus<br />Community
         </h2>
@@ -316,7 +255,7 @@ const CommunitySection = () => {
         >
           Learn more
         </Link>
-      </div>
+      </motion.div>
     </section>
   );
 };
