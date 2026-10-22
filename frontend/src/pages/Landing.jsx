@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ShieldCheck, CheckCircle, Users, Eye, Lightbulb, BookOpen, Music, Star } from 'lucide-react';
 import CommunitySection from '../components/CommunitySection';
+import IntegrationsSection from '../components/IntegrationsSection';
 
 /* ── Floating rounded-square icon card ─────────────── */
 const FloatCard = ({ children, style, className = '' }) => (
@@ -148,6 +149,9 @@ const Landing = () => {
 
       {/* ── Community Showcase Section with 100vh & Scroll Animation ── */}
       <CommunitySection />
+
+      {/* ── Integrations Section (Tools Fan) ── */}
+      <IntegrationsSection />
 
     </div>
   );

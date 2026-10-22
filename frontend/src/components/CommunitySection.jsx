@@ -159,13 +159,13 @@ const CommunitySection = () => {
   return (
     <section ref={sectionRef} className="relative w-full h-[280vh]">
       {/* Pinned 100vh viewport */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden bg-[#f8f9fa] flex items-center justify-center select-none">
+      <div className="sticky top-0 w-full h-screen overflow-hidden bg-white flex items-center justify-center select-none">
         {/* Radial light glow at center */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(ellipse 65% 80% at 50% 50%, rgba(255,255,255,0.98) 0%, rgba(244,245,248,0.7) 100%)',
+              'radial-gradient(ellipse 65% 80% at 50% 50%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 100%)',
           }}
         />
 
